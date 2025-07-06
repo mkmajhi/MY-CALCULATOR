@@ -1,0 +1,178 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap'); /* Example font */
+
+:root {
+    --background-color: #e0e0e0; /* Main background */
+    --light-shadow: #ffffff;    /* Lighter shadow color */
+    --dark-shadow: #a7a7a7;     /* Darker shadow color */
+    --red-button-bg: #ff7675;   /* Clear button background */
+    --red-button-text: #ffffff; /* Clear button text */
+    --red-button-shadow-light: #ffabab;
+    --red-button-shadow-dark: #b8504f;
+    --green-button-bg: #81c784; /* Plus button background */
+    --green-button-text: #ffffff;
+    --green-button-shadow-light: #b2f0b4;
+    --green-button-shadow-dark: #5e9c61;
+    --blue-button-bg: #64b5f6;  /* Equals button background */
+    --blue-button-text: #ffffff;
+    --blue-button-shadow-light: #9ad2ff;
+    --blue-button-shadow-dark: #3e8ecb;
+    --display-text-color: #4a4a4a;
+    --display-operand-color: #64b5f6; /* Blue for the current operand */
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--background-color);
+    font-family: 'Roboto', sans-serif;
+    color: var(--display-text-color);
+    overflow: hidden; /* Prevent scrollbar issues */
+}
+
+.calculator {
+    background-color: var(--background-color);;
+    
+    padding: 20px;
+    border-radius: 30px; /* More rounded overall */
+    box-shadow: 8px 8px 15px var(--dark-shadow),
+                -8px -8px 15px var(--light-shadow);
+    display: grid;
+    grid-template-columns: repeat(4, 70px); /* 4 columns, 70px wide */
+    grid-gap: 15px; /* Spacing between buttons */
+    margin: 20px; /* Spacing from edges on smaller screens */
+}
+
+.display {
+    grid-column: 1 / -1; /* Spans all columns */
+    background-color: var(--background-color);
+    border-radius: 20px;
+    padding: 20px 15px;
+    margin-bottom: 20px;
+    text-align: right;
+    box-shadow: inset 5px 5px 10px var(--dark-shadow),
+                inset -5px -5px 10px var(--light-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 80px; /* Ensure display has a minimum height */
+}
+
+.previous-operand {
+    font-size: 1.2em;
+    color: var(--display-text-color);
+    opacity: 0.7; /* Make it slightly faded */
+}
+
+.current-operand {
+    font-size: 2.5em;
+    font-weight: 300;
+    color: var(--display-operand-color); /* Blue for the main number */
+    word-wrap: break-word; /* Prevents overflow */
+    word-break: break-all; /* Breaks long strings */
+}
+
+.button {
+    width: 70px;
+    height: 70px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    font-size: 1.8em;
+    font-weight: 400;
+    cursor: pointer;
+    background-color: var(--background-color);
+    color: var(--display-text-color);
+    box-shadow: 6px 6px 12px var(--dark-shadow),
+                -6px -6px 12px var(--light-shadow);
+    transition: all 0.2s ease-in-out;
+}
+
+.button:active {
+    box-shadow: inset 4px 4px 8px var(--dark-shadow),
+                inset -4px -4px 8px var(--light-shadow);
+    font-size: 1.7em; /* Slight shrink on click */
+}
+
+/* Specific button styles */
+.clear {
+    background-color: var(--red-button-bg);
+    color: var(--red-button-text);
+    
+    box-shadow: 6px 6px 12px var(--red-button-shadow-dark),
+                -6px -6px 12px var(--red-button-shadow-light);
+
+    
+}
+
+.clear:active {
+    box-shadow: inset 4px 4px 8px var(--red-button-shadow-dark),
+                inset -4px -4px 8px var(--red-button-shadow-light);
+
+                
+}
+
+.span-2{
+    grid-column: span 2;
+    width: auto;
+}
+
+
+
+.span-row-2 {
+    grid-row: span 2;
+    height: auto; /* Allow it to stretch */
+}
+
+/* Green plus button */
+.operator.span-row-2 { /* Target the + button specifically */
+    background-color: var(--green-button-bg);
+    color: var(--green-button-text);
+    box-shadow: 6px 6px 12px var(--green-button-shadow-dark),
+                -6px -6px 12px var(--green-button-shadow-light);
+}
+
+.operator.span-row-2:active {
+    box-shadow: inset 4px 4px 8px var(--green-button-shadow-dark),
+                inset -4px -4px 8px var(--green-button-shadow-light);
+}
+
+/* Blue equals button */
+.equals-btn {
+    background-color: var(--blue-button-bg);
+    color: var(--blue-button-text);
+    box-shadow: 6px 6px 12px var(--blue-button-shadow-dark),
+                -6px -6px 12px var(--blue-button-shadow-light);
+}
+
+.equals-btn:active {
+    box-shadow: inset 4px 4px 8px var(--blue-button-shadow-dark),
+                inset -4px -4px 8px var(--blue-button-shadow-light);
+}
+
+/* Media query for smaller screens */
+@media (max-width: 400px) {
+    .calculator {
+        grid-template-columns: repeat(4, 60px);
+        grid-gap: 10px;
+        padding: 15px;
+    }
+    .button {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5em;
+        border-radius: 15px;
+    }
+    .display {
+        padding: 15px 10px;
+        min-height: 70px;
+    }
+    .current-operand {
+        font-size: 2em;
+    }
+    .previous-operand {
+        font-size: 1em;
+    }
+}
